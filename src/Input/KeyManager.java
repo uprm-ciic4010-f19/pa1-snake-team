@@ -12,12 +12,12 @@ public class KeyManager implements KeyListener {
 
 	private boolean[] keys,justPressed,cantPress;
 	public boolean up=false, down=false, left=false, right=false;
-	public boolean pbutt=false;
+	public boolean pbutt=false, nKey=false, addKey=false, subtractKey=false, plusKey=false, minusKey=false;
 
 
 	public KeyManager(){
 
-		keys = new boolean[256];
+		keys = new boolean[1024];
 		justPressed = new boolean[keys.length];
 		cantPress = new boolean[keys.length];
 
@@ -43,6 +43,11 @@ public class KeyManager implements KeyListener {
 		right = keys[KeyEvent.VK_D];
 
 		pbutt = keys[KeyEvent.VK_ESCAPE];
+		nKey = keys[KeyEvent.VK_N];
+		plusKey = keys[KeyEvent.VK_EQUALS];
+		minusKey = keys[KeyEvent.VK_MINUS];
+		addKey = keys[KeyEvent.VK_ADD];// Numpad Plus key
+		subtractKey = keys[KeyEvent.VK_SUBTRACT]; // Numpad Minus key
 
 	}
 
