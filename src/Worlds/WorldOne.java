@@ -1,14 +1,19 @@
 package Worlds;
-
+import java.text.DecimalFormat;
 import Game.Entities.Static.Apple;
 import Main.Handler;
 
+
 import java.awt.*;
+
 import java.util.Random;
 
 /**
  * Created by AlexVR on 7/2/2018.
  */
+
+
+
 public class WorldOne extends WorldBase{
 
     public WorldOne (Handler handler) {
@@ -47,8 +52,11 @@ public class WorldOne extends WorldBase{
 
     @Override
     public void render(Graphics g){
+        DecimalFormat df= new DecimalFormat ("####.##");
         super.render(g);
         player.render(g,playerLocation);
+
+        g.drawString("Score: " + df.format(Game.Entities.Dynamic.Player.score),700, handler.getHeight()/64 );
     }
 
 }

@@ -55,6 +55,7 @@ public class GameSetUp implements Runnable {
 
     private BufferedImage loading;
 
+    
     public GameSetUp(String title, int width, int height){
 
         this.width = width;

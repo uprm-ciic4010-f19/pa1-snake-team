@@ -12,7 +12,7 @@ public class KeyManager implements KeyListener {
 
 	private boolean[] keys,justPressed,cantPress;
 	public boolean up=false, down=false, left=false, right=false;
-	public boolean pbutt=false, nKey=false, addKey=false, subtractKey=false, plusKey=false, minusKey=false;
+	public boolean pbutt=false, xKey=false, nKey=false, addKey=false, subtractKey=false, plusKey=false, minusKey=false;
 
 
 	public KeyManager(){
@@ -44,6 +44,7 @@ public class KeyManager implements KeyListener {
 
 		pbutt = keys[KeyEvent.VK_ESCAPE];
 		nKey = keys[KeyEvent.VK_N];
+		xKey = keys[KeyEvent.VK_X];
 		plusKey = keys[KeyEvent.VK_EQUALS];
 		minusKey = keys[KeyEvent.VK_MINUS];
 		addKey = keys[KeyEvent.VK_ADD];// Numpad Plus key

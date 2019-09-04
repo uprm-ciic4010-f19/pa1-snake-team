@@ -1,5 +1,6 @@
 package Game.Entities.Dynamic;
 
+
 import Main.Handler;
 
 import java.awt.*;
@@ -26,7 +27,8 @@ public class Player {
 
 	public String direction;
 
-	public double score = 0;
+
+	public static double score = 0;
 
 
 	public Player(Handler handler){
@@ -66,6 +68,11 @@ public class Player {
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)){ //Adds tail debug
 			EatDebug();
 		}
+		
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_X)){ //Remove tail debug
+
+		}
+
 
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){ //Pause Game function
 			State.setState(handler.getGame().pauseState);
@@ -157,7 +164,7 @@ public class Player {
 		if(speed > 3) {
 			speed--;
 		}
-		score = Math.sqrt(2*(score+1));
+		score = Math.sqrt(2*score+1);
 		lenght++;
 		Tail tail= null;
 		handler.getWorld().appleLocation[xCoord][yCoord]=false;
@@ -266,10 +273,7 @@ public class Player {
 	}
 
 	public void EatDebug(){
-		if(speed > 2) {
-			speed--;
-		}
-		score = Math.sqrt(2*(score+1));
+		score = Math.sqrt(2*score+1);
 		lenght++;
 		Tail tail= null;
 		switch (direction){
