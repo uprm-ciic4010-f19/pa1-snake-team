@@ -47,19 +47,19 @@ public class Player {
 			checkCollisionAndMove();
 			moveCounter=0;
 		}
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && !(direction=="down")){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && !(direction=="Down")){
 				direction="Up";
 		}
 
-		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN) && !(direction=="up")){
+		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN) && !(direction=="Up")){
 				direction="Down";
 		}
 
-		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT) && !(direction=="right")){
+		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT) && !(direction=="Right")){
 				direction="Left";
 		}
 
-		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT) && !(direction=="left")){
+		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT) && !(direction=="Left")){
 				direction="Right";
 		}
 
