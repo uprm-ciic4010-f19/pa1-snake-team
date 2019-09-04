@@ -47,40 +47,20 @@ public class Player {
 			checkCollisionAndMove();
 			moveCounter=0;
 		}
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)){
-			if(direction=="Down"){
-				direction="Down";
-			}
-			else{
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && !(direction=="down")){
 				direction="Up";
-			}
 		}
 
-		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)){
-			if(direction=="Up"){
-				direction="Up";
-			}
-			else{
+		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN) && !(direction=="up")){
 				direction="Down";
-			}
 		}
 
-		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT)){
-			if(direction=="Right"){
-				direction="Right";
-			}
-			else{
+		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT) && !(direction=="right")){
 				direction="Left";
-			}
 		}
 
-		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)){
-			if(direction=="Left"){
-				direction="Left";
-			}
-			else{
+		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT) && !(direction=="left")){
 				direction="Right";
-			}
 		}
 
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)){ //Adds tail debug
@@ -91,14 +71,14 @@ public class Player {
 			State.setState(handler.getGame().pauseState);
 		}
 
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ADD) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_EQUALS)){ //Speeds up snake debug. 1 might be too fast; 2 is good.
-			if(speed > 2) {
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ADD) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_EQUALS)){ //Speed up snake debug. 
+			if(speed > 3) { //3 is good max speed.
 				speed--;
 			}
 		}
 
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_SUBTRACT) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)){ // Slows down snake debug. 10 is slow enough.
-			if(speed < 10) {
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_SUBTRACT) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)){ // Slow down snake debug.
+			if(speed < 10) { // 10 is slow enough.
 				speed++;
 			}
 		}
@@ -174,7 +154,7 @@ public class Player {
 	}
 
 	public void Eat(){
-		if(speed > 2) {
+		if(speed > 3) {
 			speed--;
 		}
 		score = Math.sqrt(2*(score+1));
