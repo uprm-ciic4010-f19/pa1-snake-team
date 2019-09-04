@@ -47,39 +47,59 @@ public class Player {
 			checkCollisionAndMove();
 			moveCounter=0;
 		}
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && !(direction=="Down")){
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)){
+			if(direction=="Down"){
+				direction="Down";
+			}
+			else{
 				direction="Up";
+			}
 		}
 
-		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN) && !(direction=="Up")){
-			direction="Down";
+		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)){
+			if(direction=="Up"){
+				direction="Up";
+			}
+			else{
+				direction="Down";
+			}
 		}
 
-		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT) && !(direction=="Right")){
-				direction="Left";
-		}
-
-		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT) && !(direction=="Left")){
+		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT)){
+			if(direction=="Right"){
 				direction="Right";
+			}
+			else{
+				direction="Left";
+			}
 		}
 
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)){ //Add tail debug attributed to N key
+		else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)){
+			if(direction=="Left"){
+				direction="Left";
+			}
+			else{
+				direction="Right";
+			}
+		}
+
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)){ //Adds tail debug
 			EatDebug();
 		}
 
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){ //Pause Game function attributed to ESC key
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){ //Pause Game function
 			State.setState(handler.getGame().pauseState);
 		}
 
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ADD) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_EQUALS)){  //Speed up snake debug attributed to = key and + numpad key.  	
-			if(speed > 3) {   	//3 is good max speed.
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ADD) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_EQUALS)){ //Speeds up snake debug. 1 might be too fast; 2 is good.
+			if(speed > 2) {
 				speed--;
 			}
 		}
 
-		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_SUBTRACT) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)){ // Slows down snake debug attributed to - key and - numpad key. 
-			if(speed < 10) {  //10 is slow enough.
-				speed++; 
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_SUBTRACT) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)){ // Slows down snake debug. 10 is slow enough.
+			if(speed < 10) {
+				speed++;
 			}
 		}
 
@@ -154,7 +174,7 @@ public class Player {
 	}
 
 	public void Eat(){
-		if(speed > 3) {
+		if(speed > 2) {
 			speed--;
 		}
 		score = Math.sqrt(2*(score+1));
@@ -265,7 +285,10 @@ public class Player {
 		handler.getWorld().playerLocation[tail.x][tail.y] = true;
 	}
 
-	public void EatDebug(){ //Eat debug function. Adds tail without adding new apple on world
+	public void EatDebug(){
+		if(speed > 2) {
+			speed--;
+		}
 		score = Math.sqrt(2*(score+1));
 		lenght++;
 		Tail tail= null;
