@@ -44,7 +44,7 @@ public class WorldOne extends WorldBase{
                 }
             }while(!goodCoordinates);
 
-            apple = new Apple(handler,appleX,appley);
+            apple = new Apple(handler,appleX,appley, true);
             appleLocation[appleX][appley]=true;
 
         }
@@ -52,7 +52,7 @@ public class WorldOne extends WorldBase{
 
     @Override
     public void render(Graphics g){
-        DecimalFormat df= new DecimalFormat ("####.##");
+        DecimalFormat df= new DecimalFormat ("#.##");
         super.render(g);
         player.render(g,playerLocation);
 
