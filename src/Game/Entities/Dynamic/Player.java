@@ -70,7 +70,20 @@ public class Player {
 		}
 		
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_X)){ //Remove tail debug
+			if(lenght >1) {
+			lenght--;
+			if (score > 0) {
+				score -= Math.sqrt(2*score+1);
+			}
+			if(score < 0) {
+				score = 0;
+			}
+			handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y] = false;
+			handler.getWorld().body.removeLast();
+			}
+			else {
 			State.setState(handler.getGame().gameoverState);
+			}
 		}
 
 
@@ -147,11 +160,13 @@ public class Player {
 			for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
 				g.setColor(Color.GREEN);
 
+				
 				if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
 					g.fillRect((i*handler.getWorld().GridPixelsize),
 							(j*handler.getWorld().GridPixelsize),
 							handler.getWorld().GridPixelsize,
 							handler.getWorld().GridPixelsize);
+
 				}
 
 			}

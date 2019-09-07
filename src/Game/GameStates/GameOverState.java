@@ -53,7 +53,7 @@ public class GameOverState extends State {
 
     @Override
     public void render(Graphics g) {
-    	DecimalFormat df= new DecimalFormat ("####.##");
+    	DecimalFormat df= new DecimalFormat ("#.##");
     	g.drawImage(Images.GameOver,0,0,handler.getHeight(),handler.getWidth(),Color.BLACK,null);
         Font f= new Font("Times New Roman", Font.PLAIN, 50);
         g.setFont(f);
