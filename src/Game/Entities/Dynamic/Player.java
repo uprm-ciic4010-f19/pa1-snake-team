@@ -70,7 +70,7 @@ public class Player {
 		}
 		
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_X)){ //Remove tail debug
-
+			State.setState(handler.getGame().gameoverState);
 		}
 
 
@@ -164,7 +164,7 @@ public class Player {
 		if(speed > 3) {
 			speed--;
 		}
-		score = Math.sqrt(2*score+1);
+		score += Math.sqrt(2*score+1);
 		lenght++;
 		Tail tail= null;
 		handler.getWorld().appleLocation[xCoord][yCoord]=false;
@@ -273,7 +273,7 @@ public class Player {
 	}
 
 	public void EatDebug(){
-		score = Math.sqrt(2*score+1);
+		score += Math.sqrt(2*score+1);
 		lenght++;
 		Tail tail= null;
 		switch (direction){
