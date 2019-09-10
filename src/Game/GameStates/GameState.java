@@ -25,7 +25,8 @@ public class GameState extends State {
 
                 handler.getWorld().playerLocation[i][j]=false;
                 handler.getWorld().appleLocation[i][j]=false;
-
+                handler.getWorld().badappleLocation[i][j]=false;
+                
             }
         }
         handler.getWorld().playerLocation[handler.getWorld().player.xCoord][handler.getWorld().player.yCoord] =true;

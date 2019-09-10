@@ -30,8 +30,9 @@ public abstract class WorldBase {
 
     public Boolean appleOnBoard;
     protected Apple apple;
+    protected Apple badapple;
     public Boolean[][] appleLocation;
-
+    public Boolean[][] badappleLocation;
 
     public Boolean[][] playerLocation;
 
@@ -44,6 +45,7 @@ public abstract class WorldBase {
         appleOnBoard = false;
 
 
+        
     }
     public void tick(){
 

@@ -16,6 +16,8 @@ import java.util.Random;
 
 public class WorldOne extends WorldBase{
 
+	int appleX;
+	int appley;
     public WorldOne (Handler handler) {
         super(handler);
 
@@ -24,7 +26,7 @@ public class WorldOne extends WorldBase{
         GridPixelsize = (800/GridWidthHeightPixelCount);
         playerLocation = new Boolean[GridWidthHeightPixelCount][GridWidthHeightPixelCount];
         appleLocation = new Boolean[GridWidthHeightPixelCount][GridWidthHeightPixelCount];
-
+        badappleLocation = new Boolean[GridWidthHeightPixelCount][GridWidthHeightPixelCount];
     }
 
     @Override
@@ -33,8 +35,8 @@ public class WorldOne extends WorldBase{
         player.tick();
         if(!appleOnBoard){
             appleOnBoard=true;
-            int appleX = new Random().nextInt(handler.getWorld().GridWidthHeightPixelCount-1);
-            int appley = new Random().nextInt(handler.getWorld().GridWidthHeightPixelCount-1);
+            appleX = new Random().nextInt(handler.getWorld().GridWidthHeightPixelCount-1);
+            appley = new Random().nextInt(handler.getWorld().GridWidthHeightPixelCount-1);
 
             //change coordinates till one is selected in which the player isnt standing
             boolean goodCoordinates=false;
@@ -44,12 +46,28 @@ public class WorldOne extends WorldBase{
                 }
             }while(!goodCoordinates);
 
-            apple = new Apple(handler,appleX,appley, true);
+            apple = new Apple(handler,appleX,appley);
             appleLocation[appleX][appley]=true;
 
         }
+
+        if(Game.Entities.Dynamic.Player.stepCounter == 100) {
+        	Game.Entities.Dynamic.Player.stepCounter = 0;
+        	spawnBadApple();
+        }
     }
 
+	public void spawnBadApple() {
+		Game.Entities.Dynamic.Player.badAppleCount++;
+		System.out.println("bad");
+		Game.Entities.Dynamic.Player.stepCounter = 0;
+		appleLocation[appleX][appley]=false;
+		badapple = new Apple(handler,appleX,appley);
+		badappleLocation[appleX][appley]=true;
+		appleOnBoard = false;
+	}
+	
+	
     @Override
     public void render(Graphics g){
         DecimalFormat df= new DecimalFormat ("#.##");
