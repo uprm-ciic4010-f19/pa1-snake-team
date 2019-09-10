@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
+import Game.Entities.Static.Apple;
 import Game.GameStates.State;
 
 /**
@@ -21,6 +22,8 @@ public class Player {
 	public int xCoord;
 	public int yCoord;
 
+	public static int badAppleCount;
+	public static int stepCounter;
 	public int moveCounter;
 	public int speed;
 
@@ -36,6 +39,8 @@ public class Player {
 		xCoord = 0;
 		yCoord = 0;
 		moveCounter = 0;
+		stepCounter = 0;
+		badAppleCount = 0;
 		speed = 10; //The higher the number, the slower the snake
 		direction= "Right";
 		justAte = false;
@@ -48,6 +53,7 @@ public class Player {
 		if(moveCounter>=speed) {
 			checkCollisionAndMove();
 			moveCounter=0;
+			stepCounter++;
 		}
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && !(direction=="Down")){
 				direction="Up";
@@ -86,10 +92,10 @@ public class Player {
 			}
 		}
 
-
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){ //Pause Game function
 			State.setState(handler.getGame().pauseState);
 		}
+		
 
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ADD) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_EQUALS)){ //Speed up snake debug. 
 			if(speed > 3) { //3 is good max speed.
@@ -102,6 +108,8 @@ public class Player {
 				speed++;
 			}
 		}
+	
+		
 
 	}
 
@@ -145,6 +153,11 @@ public class Player {
 		if(handler.getWorld().appleLocation[xCoord][yCoord]){
 			Eat();
 		}
+		
+		if(handler.getWorld().badappleLocation[xCoord][yCoord]){
+			badEat();
+		}
+		
 
 		if(!handler.getWorld().body.isEmpty()) {
 			handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y] = false;
@@ -158,7 +171,7 @@ public class Player {
 		Random r = new Random();
 		for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
 			for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
-				g.setColor(Color.GREEN);
+				g.setColor(Color.RED);
 
 				
 				if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
@@ -171,11 +184,46 @@ public class Player {
 
 			}
 		}
+		
+		for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
+			for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
+				g.setColor(Color.ORANGE);
+
+				
+				if(playeLocation[i][j]||handler.getWorld().badappleLocation[i][j]){
+					g.fillRect((i*handler.getWorld().GridPixelsize),
+							(j*handler.getWorld().GridPixelsize),
+							handler.getWorld().GridPixelsize,
+							handler.getWorld().GridPixelsize);
+
+				}
+
+			}
+		}
+		
+		for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
+			for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
+				g.setColor(Color.GREEN);
+
+				
+				if(playeLocation[i][j]){
+					g.fillRect((i*handler.getWorld().GridPixelsize),
+							(j*handler.getWorld().GridPixelsize),
+							handler.getWorld().GridPixelsize,
+							handler.getWorld().GridPixelsize);
+
+				}
+
+			}
+		}
 
 
 	}
+	
+	
 
 	public void Eat(){
+		stepCounter=0;
 		if(speed > 3) {
 			speed--;
 		}
@@ -392,6 +440,25 @@ public class Player {
 		}
 		handler.getWorld().body.addLast(tail);
 		handler.getWorld().playerLocation[tail.x][tail.y] = true;
+	}
+	
+	public void badEat() { //Eating a bad apple 
+		stepCounter=0;
+		handler.getWorld().badappleLocation[xCoord][yCoord]=false;
+		if(lenght >1) {
+			lenght--;
+			if (score > 0) {
+				score -= Math.sqrt(2*score+1);
+			}
+			if(score < 0) {
+				score = 0;
+			}
+			handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y] = false;
+			handler.getWorld().body.removeLast();
+			}
+			else { //Eating a bad apple with no tail ends game
+			State.setState(handler.getGame().gameoverState);
+			}
 	}
 
 	public void kill(){
