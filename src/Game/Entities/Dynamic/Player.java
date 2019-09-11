@@ -24,6 +24,7 @@ public class Player {
 
 	public static int stepCounter;
 	public static int powerCounter;
+	public static int depowerCounter;
 	public int moveCounter;
 	public int speed;
 	public boolean immunity;
@@ -42,6 +43,7 @@ public class Player {
 		moveCounter = 0;
 		stepCounter = 0;
 		powerCounter = 0;
+		depowerCounter = 0;
 		immuneCounter = 0;
 		immunity = false;
 		speed = 10; //The higher the number, the slower the snake
@@ -58,6 +60,7 @@ public class Player {
 			moveCounter=0;
 			stepCounter++;
 			powerCounter++;
+			depowerCounter++;
 			if (immunity == true && immuneCounter < 50) { //Player may not crash into self while immune
 				immuneCounter++;
 			}
@@ -185,6 +188,7 @@ public class Player {
 			immunity = true;
 			immuneCounter = 0;
 			powerCounter=0;
+			depowerCounter=0;
 			handler.getWorld().invincibilityLocation[xCoord][yCoord] = false;
 		}
 
@@ -525,6 +529,7 @@ public class Player {
 	
 	public void slowEat(){ //Eating blue apple is good, but slows snake down
 		powerCounter=0;
+		depowerCounter=0;
 		if(speed < 9) {
 			speed += 2;
 		}
