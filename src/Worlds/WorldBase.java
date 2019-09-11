@@ -31,9 +31,13 @@ public abstract class WorldBase {
     public Boolean appleOnBoard;
     protected Apple apple;
     protected Apple badapple;
+    protected Apple slowdown;
+    protected Apple invincibility;
     public Boolean[][] appleLocation;
     public Boolean[][] badappleLocation;
-
+    public Boolean[][] slowdownLocation;
+    public Boolean[][] invincibilityLocation;
+    
     public Boolean[][] playerLocation;
 
     public LinkedList<Tail> body = new LinkedList<>();

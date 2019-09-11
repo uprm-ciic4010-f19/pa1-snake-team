@@ -26,6 +26,8 @@ public class GameState extends State {
                 handler.getWorld().playerLocation[i][j]=false;
                 handler.getWorld().appleLocation[i][j]=false;
                 handler.getWorld().badappleLocation[i][j]=false;
+                handler.getWorld().slowdownLocation[i][j]=false;
+                handler.getWorld().invincibilityLocation[i][j]=false;
                 
             }
         }
