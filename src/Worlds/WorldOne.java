@@ -38,10 +38,10 @@ public class WorldOne extends WorldBase{
             appleX = new Random().nextInt(handler.getWorld().GridWidthHeightPixelCount-1);
             appley = new Random().nextInt(handler.getWorld().GridWidthHeightPixelCount-1);
 
-            //change coordinates till one is selected in which the player isnt standing
+            //change coordinates till one is selected in which the player isn't standing
             boolean goodCoordinates=false;
             do{
-                if(!handler.getWorld().playerLocation[appleX][appley]){
+                if(!handler.getWorld().playerLocation[appleX][appley] && !badappleLocation[appleX][appley]){
                     goodCoordinates=true;
                 }
             }while(!goodCoordinates);
@@ -51,14 +51,13 @@ public class WorldOne extends WorldBase{
 
         }
 
-        if(Game.Entities.Dynamic.Player.stepCounter == 100) {
+        if(Game.Entities.Dynamic.Player.stepCounter == 100) { //Spawn bad Apple after # steps. Counter resets after spawn or eating.
         	Game.Entities.Dynamic.Player.stepCounter = 0;
         	spawnBadApple();
         }
     }
 
 	public void spawnBadApple() {
-		Game.Entities.Dynamic.Player.badAppleCount++;
 		System.out.println("bad");
 		Game.Entities.Dynamic.Player.stepCounter = 0;
 		appleLocation[appleX][appley]=false;
