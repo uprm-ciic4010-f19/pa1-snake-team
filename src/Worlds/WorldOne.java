@@ -18,6 +18,10 @@ public class WorldOne extends WorldBase{
 
 	int appleX;
 	int appley;
+	int Power;
+	int powerX;
+	int powerY;
+	
     public WorldOne (Handler handler) {
         super(handler);
 
@@ -27,6 +31,8 @@ public class WorldOne extends WorldBase{
         playerLocation = new Boolean[GridWidthHeightPixelCount][GridWidthHeightPixelCount];
         appleLocation = new Boolean[GridWidthHeightPixelCount][GridWidthHeightPixelCount];
         badappleLocation = new Boolean[GridWidthHeightPixelCount][GridWidthHeightPixelCount];
+        slowdownLocation = new Boolean[GridWidthHeightPixelCount][GridWidthHeightPixelCount];
+        invincibilityLocation = new Boolean[GridWidthHeightPixelCount][GridWidthHeightPixelCount];
     }
 
     @Override
@@ -55,10 +61,18 @@ public class WorldOne extends WorldBase{
         	Game.Entities.Dynamic.Player.stepCounter = 0;
         	spawnBadApple();
         }
+        
+        if(Game.Entities.Dynamic.Player.powerCounter == 10) { //Spawn bad Apple after # steps. Counter resets after spawn or eating.
+        	spawnPowerUp();
+        	Game.Entities.Dynamic.Player.powerCounter = 0;
+        }
+        
+        if(Game.Entities.Dynamic.Player.powerCounter == 20) {
+			
+		}
     }
 
-	public void spawnBadApple() {
-		System.out.println("bad");
+	public void spawnBadApple() { // Replaces good apple with bad apple
 		Game.Entities.Dynamic.Player.stepCounter = 0;
 		appleLocation[appleX][appley]=false;
 		badapple = new Apple(handler,appleX,appley);
@@ -66,13 +80,45 @@ public class WorldOne extends WorldBase{
 		appleOnBoard = false;
 	}
 	
+	public void spawnPowerUp() { //Spawn a random power
+		
+		Power = new Random().nextInt(2);
+		
+		powerX = new Random().nextInt(handler.getWorld().GridWidthHeightPixelCount-1);
+        powerY = new Random().nextInt(handler.getWorld().GridWidthHeightPixelCount-1);
+        
+        boolean goodCoordinates=false;
+        do{
+            if(!handler.getWorld().playerLocation[powerX][powerY] && !badappleLocation[powerX][powerY] && !appleLocation[powerX][powerY]){
+                goodCoordinates=true;
+            }
+        }while(!goodCoordinates);
+		
+         
+		if (Power==0) {
+			slowdown = new Apple(handler,powerX,powerY);
+			slowdownLocation[powerX][powerY]=true;
+			System.out.println(powerX + " " + powerY);
+         }
+		
+		if (Power==1) {
+			invincibility = new Apple(handler,powerX,powerY);
+			invincibilityLocation[powerX][powerY]=true;
+			System.out.println(powerX + " " + powerY);
+         }
+	}
+	
+         
+		
+	
 	
     @Override
     public void render(Graphics g){
-        DecimalFormat df= new DecimalFormat ("#.##");
+        
+    	DecimalFormat df= new DecimalFormat ("#.##");
         super.render(g);
         player.render(g,playerLocation);
-
+        g.setColor(Color.GREEN);
         g.drawString("Score: " + df.format(Game.Entities.Dynamic.Player.score),700, handler.getHeight()/64 );
     }
 
