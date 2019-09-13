@@ -23,9 +23,11 @@ public class GameOverState extends State {
 
       
 
-        uiManager.addObjects(new UIImageButton(56, (223+(64+16))+(64+16), 128, 64, Images.BTitle, () -> {
-            handler.getMouseManager().setUimanager(null);
-            State.setState(handler.getGame().menuState);
+        uiManager.addObjects(new UIImageButton((handler.getWidth()/2)-100, 500, 200, 64, Images.Restart, () -> {
+        	handler.getMouseManager().setUimanager(null);
+            handler.getGame().reStart();
+            State.setState(handler.getGame().gameState);
+            Game.Entities.Dynamic.Player.score = 0;
         }));
 
 
@@ -53,11 +55,11 @@ public class GameOverState extends State {
 
     @Override
     public void render(Graphics g) {
-    	DecimalFormat df= new DecimalFormat ("#.##");
+    	DecimalFormat df= new DecimalFormat ("#.#");
     	g.drawImage(Images.GameOver,0,0,handler.getHeight(),handler.getWidth(),Color.BLACK,null);
         Font f= new Font("Times New Roman", Font.PLAIN, 50);
         g.setFont(f);
-        g.drawString("Score: " + df.format(Game.Entities.Dynamic.Player.score), handler.getWidth()/2, handler.getHeight()/2);
+        g.drawString("Score: " + df.format(Game.Entities.Dynamic.Player.score), 275, handler.getHeight()/2);
  
         uiManager.Render(g);
 

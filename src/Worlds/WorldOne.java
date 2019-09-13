@@ -52,7 +52,7 @@ public class WorldOne extends WorldBase{
 				}
 			}while(!goodCoordinates);
 
-			apple = new Apple(handler,appleX,appley);
+			apple = new Apple(handler,appleX,appley,true);
 			appleLocation[appleX][appley]=true;
 
 		}
@@ -77,7 +77,7 @@ public class WorldOne extends WorldBase{
 		public void spawnBadApple() { // Replaces good apple with bad apple
 			Game.Entities.Dynamic.Player.stepCounter = 0;
 			appleLocation[appleX][appley]=false;
-			badapple = new Apple(handler,appleX,appley);
+			badapple = new Apple(handler,appleX,appley,false);
 			badappleLocation[appleX][appley]=true;
 			appleOnBoard = false;
 		}
@@ -98,13 +98,13 @@ public class WorldOne extends WorldBase{
 
 
 			if (Power==0) {
-				slowdown = new Apple(handler,powerX,powerY);
+				slowdown = new Apple(handler,powerX,powerY,true);
 				slowdownLocation[powerX][powerY]=true;
 				System.out.println(powerX + " " + powerY);
 			}
 
 			if (Power==1) {
-				invincibility = new Apple(handler,powerX,powerY);
+				invincibility = new Apple(handler,powerX,powerY,true);
 				invincibilityLocation[powerX][powerY]=true;
 				System.out.println(powerX + " " + powerY);
 			}
