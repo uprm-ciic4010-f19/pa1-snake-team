@@ -89,7 +89,7 @@ public class GameSetUp implements Runnable {
         optionsState = new OptionsState(handler);
         gameoverState = new GameOverState(handler);
         
-        State.setState(gameoverState);
+        State.setState(menuState);
 
         try {
 
