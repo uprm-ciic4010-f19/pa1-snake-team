@@ -27,7 +27,6 @@ public class GameOverState extends State {
         	handler.getMouseManager().setUimanager(null);
             handler.getGame().reStart();
             State.setState(handler.getGame().gameState);
-            Game.Entities.Dynamic.Player.score = 0;
         }));
 
 
